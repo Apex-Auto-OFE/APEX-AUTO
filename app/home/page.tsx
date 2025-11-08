@@ -3,7 +3,7 @@
 import type React from "react"
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Instagram } from "lucide-react"
+import { ArrowRight, Instagram, ShoppingBag } from "lucide-react"
 import { ImageWithLoading } from "@/components/image-with-loading"
 import { FirebaseAnalytics } from "@/components/firebase-analytics"
 import { Navigation } from "@/components/navigation"
@@ -16,12 +16,6 @@ const PinterestIcon = ({ className }: { className?: string }) => (
   </svg>
 )
 
-// Etsy Icon Component
-const EtsyIcon = ({ className }: { className?: string }) => (
-  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
-    <path d="M10.273 7.446v8.843H6.817v1.444h7.918v-1.444h-1.58V7.446h1.58V6.003H6.817v1.443zm10.711 3.417l-.962 3.708h-1.073l.618-4.95h-6.273v1.443h1.483v8.843h-1.483v1.444h7.918v-1.444h-1.58v-4.068h1.628l.597 2.59h1.58l-.834-3.95.834-3.616h-1.58l-.597 2.59h-1.628v-3.89h2.456c.469 0 .77.298.916.792l.726 2.672h1.186L24 6.003h-9.328v1.443h1.483l-.006 1.417h6.836z"/>
-  </svg>
-)
 
 interface Product {
   id: string
@@ -205,7 +199,7 @@ export default function HomePage() {
                     className="w-12 h-12 bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 transition-all duration-300 hover:scale-110 flex items-center justify-center"
                     aria-label="Etsy"
                   >
-                    <EtsyIcon className="w-6 h-6" />
+                    <ShoppingBag className="w-6 h-6" />
                   </button>
                 </div>
               </div>
