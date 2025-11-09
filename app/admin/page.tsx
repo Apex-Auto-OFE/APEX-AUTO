@@ -10,7 +10,6 @@ import { ImageWithLoading } from "@/components/image-with-loading"
 import { FirebaseAnalytics } from "@/components/firebase-analytics"
 import { AdminAuth } from "@/components/admin-auth"
 import { Navigation } from "@/components/navigation"
-import { AnalyticsDashboard } from "@/components/analytics-dashboard"
 import { logEvent } from '@/lib/firebase-utils'
 import { getProducts, addProduct, updateProduct, deleteProduct, getAboutContent, saveAboutContent, getCompanyRules, saveCompanyRules, getSocialMediaUrls, saveSocialMediaUrls } from '@/lib/firebase-utils'
 
@@ -50,7 +49,8 @@ export default function AdminPage() {
   const [socialMedia, setSocialMedia] = useState({
     instagram: "https://instagram.com/apexauto",
     pinterest: "https://pinterest.com/apexauto",
-    etsy: "https://etsy.com/shop/apexauto"
+    etsy: "https://etsy.com/shop/apexauto",
+    threads: "https://threads.net/@apexauto"
   })
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
@@ -377,14 +377,14 @@ export default function AdminPage() {
               SOCIAL MEDIA
             </button>
             <button
-              onClick={() => setActiveTab("analytics")}
+              onClick={() => setActiveTab("sync")}
               className={`px-6 py-3 text-sm font-medium tracking-widest uppercase transition-all duration-300 ${
-                activeTab === "analytics"
+                activeTab === "sync"
                   ? "border-b-2 border-black dark:border-white text-black dark:text-white"
                   : "text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white"
               }`}
             >
-              📊 ANALYTICS
+              ETSY SYNC
             </button>
           </div>
 
@@ -912,6 +912,18 @@ export default function AdminPage() {
                       className="border-gray-300 dark:border-gray-600 focus:border-black dark:focus:border-white bg-white dark:bg-white text-black dark:text-black"
                     />
                   </div>
+
+                  <div>
+                    <label className="block text-sm font-medium tracking-widest uppercase mb-2 text-black dark:text-white">
+                      THREADS URL
+                    </label>
+                    <Input
+                      value={socialMedia.threads}
+                      onChange={(e) => setSocialMedia(prev => ({ ...prev, threads: e.target.value }))}
+                      placeholder="https://threads.net/@apexauto"
+                      className="border-gray-300 dark:border-gray-600 focus:border-black dark:focus:border-white bg-white dark:bg-white text-black dark:text-black"
+                    />
+                  </div>
                 </div>
 
                 <div className="flex justify-end mt-6">
@@ -927,9 +939,65 @@ export default function AdminPage() {
             </div>
           )}
 
-          {/* Analytics Tab */}
-          {activeTab === "analytics" && (
-            <AnalyticsDashboard />
+          {/* Etsy Sync Tab */}
+          {activeTab === "sync" && (
+            <div className="max-w-4xl mx-auto">
+              <div className="bg-white dark:bg-black border-2 border-black dark:border-white p-8">
+                <h2 className="text-2xl font-bold tracking-widest uppercase mb-6">
+                  SYNC ETSY PRODUCTS
+                </h2>
+                
+                <div className="space-y-6">
+                  <div className="bg-gray-50 dark:bg-gray-900 p-6 border border-gray-200 dark:border-gray-700">
+                    <h3 className="text-sm font-bold tracking-widest uppercase mb-4">HOW TO SYNC YOUR ETSY PRODUCTS:</h3>
+                    <ol className="space-y-3 text-sm text-gray-600 dark:text-gray-400">
+                      <li className="flex gap-3">
+                        <span className="font-bold">1.</span>
+                        <span>Go to your Etsy shop and copy your product details</span>
+                      </li>
+                      <li className="flex gap-3">
+                        <span className="font-bold">2.</span>
+                        <span>Add products manually using the PRODUCTS tab above</span>
+                      </li>
+                      <li className="flex gap-3">
+                        <span className="font-bold">3.</span>
+                        <span>Make sure to include the Etsy product URL in the "Buy URL" field</span>
+                      </li>
+                      <li className="flex gap-3">
+                        <span className="font-bold">4.</span>
+                        <span>When users click "BUY NOW", they'll be redirected to your Etsy listing</span>
+                      </li>
+                    </ol>
+                  </div>
+
+                  <div className="bg-blue-50 dark:bg-blue-900/20 p-6 border border-blue-200 dark:border-blue-800">
+                    <h3 className="text-sm font-bold tracking-widest uppercase mb-3 text-blue-900 dark:text-blue-300">
+                      TIP: PRODUCT STRUCTURE
+                    </h3>
+                    <p className="text-sm text-blue-800 dark:text-blue-400 mb-3">
+                      Each product should have:
+                    </p>
+                    <ul className="space-y-2 text-sm text-blue-700 dark:text-blue-400">
+                      <li>• Product Name</li>
+                      <li>• Price (your Etsy price)</li>
+                      <li>• Category (DIGITAL PRODUCTS, SHOES, CLOTHING, etc.)</li>
+                      <li>• Image URL (from Etsy or your hosting)</li>
+                      <li>• Description</li>
+                      <li>• Buy URL (your Etsy product link)</li>
+                    </ul>
+                  </div>
+
+                  <div className="text-center pt-4">
+                    <Button
+                      onClick={() => setActiveTab("products")}
+                      className="bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 border-0 text-sm font-medium tracking-widest uppercase px-8 py-4"
+                    >
+                      GO TO PRODUCTS TAB
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
           )}
         </div>
       </section>

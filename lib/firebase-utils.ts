@@ -289,7 +289,7 @@ export const getSocialMediaUrls = async () => {
   }
 }
 
-export const saveSocialMediaUrls = async (socialMediaUrls: {instagram: string, pinterest: string, etsy: string}) => {
+export const saveSocialMediaUrls = async (socialMediaUrls: {instagram: string, pinterest: string, etsy: string, threads: string}) => {
   try {
     const docRef = doc(db, 'settings', 'socialMedia')
     // Try to update first

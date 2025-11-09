@@ -3,7 +3,7 @@
 import type React from "react"
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Instagram, ShoppingBag } from "lucide-react"
+import { ArrowRight, Instagram, ShoppingBag, AtSign } from "lucide-react"
 import { ImageWithLoading } from "@/components/image-with-loading"
 import { FirebaseAnalytics } from "@/components/firebase-analytics"
 import { Navigation } from "@/components/navigation"
@@ -38,7 +38,8 @@ export default function HomePage() {
   const [socialMedia, setSocialMedia] = useState({
     instagram: "https://instagram.com/apexauto",
     pinterest: "https://pinterest.com/apexauto",
-    etsy: "https://etsy.com/shop/apexauto"
+    etsy: "https://etsy.com/shop/apexauto",
+    threads: "https://threads.net/@apexauto"
   })
 
   useEffect(() => {
@@ -200,6 +201,13 @@ export default function HomePage() {
                     aria-label="Etsy"
                   >
                     <ShoppingBag className="w-6 h-6" />
+                  </button>
+                  <button
+                    onClick={() => handleSocialClick('threads', socialMedia.threads)}
+                    className="w-12 h-12 bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 transition-all duration-300 hover:scale-110 flex items-center justify-center"
+                    aria-label="Threads"
+                  >
+                    <AtSign className="w-6 h-6" />
                   </button>
                 </div>
               </div>
