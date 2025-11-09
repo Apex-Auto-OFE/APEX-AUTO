@@ -10,6 +10,7 @@ import { ImageWithLoading } from "@/components/image-with-loading"
 import { FirebaseAnalytics } from "@/components/firebase-analytics"
 import { AdminAuth } from "@/components/admin-auth"
 import { Navigation } from "@/components/navigation"
+import { AnalyticsDashboard } from "@/components/analytics-dashboard"
 import { logEvent } from '@/lib/firebase-utils'
 import { getProducts, addProduct, updateProduct, deleteProduct, getAboutContent, saveAboutContent, getCompanyRules, saveCompanyRules, getSocialMediaUrls, saveSocialMediaUrls } from '@/lib/firebase-utils'
 
@@ -374,6 +375,16 @@ export default function AdminPage() {
               }`}
             >
               SOCIAL MEDIA
+            </button>
+            <button
+              onClick={() => setActiveTab("analytics")}
+              className={`px-6 py-3 text-sm font-medium tracking-widest uppercase transition-all duration-300 ${
+                activeTab === "analytics"
+                  ? "border-b-2 border-black dark:border-white text-black dark:text-white"
+                  : "text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white"
+              }`}
+            >
+              📊 ANALYTICS
             </button>
           </div>
 
@@ -914,6 +925,11 @@ export default function AdminPage() {
                 </div>
               </div>
             </div>
+          )}
+
+          {/* Analytics Tab */}
+          {activeTab === "analytics" && (
+            <AnalyticsDashboard />
           )}
         </div>
       </section>
